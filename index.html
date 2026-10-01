@@ -59,7 +59,8 @@ h1{
 .btn.danger{color:var(--tgt); border-color:var(--tgt)}
 .btn:focus-visible,.k:focus-visible,input:focus-visible{outline:2px solid var(--focus); outline-offset:2px}
 
-.line{display:grid; grid-template-columns:58px 1fr 1fr; gap:8px; align-items:center; flex:none}
+.line{display:grid; grid-template-columns:1fr 1fr; gap:4px 8px; align-items:center; flex:none}
+.line .who{grid-column:1 / -1}
 .who{
   display:flex; align-items:center; gap:7px;
   font:600 15px var(--cond); letter-spacing:.12em; text-transform:uppercase;
@@ -141,14 +142,13 @@ dd{margin:0; font:600 15px var(--mono); font-variant-numeric:tabular-nums}
   <div class="head">
     <h1><i class="mark"></i>Wardogs</h1>
     <div class="tools">
-      <button type="button" class="btn" id="swap">Trocar</button>
       <button type="button" class="btn" id="clear">Novo alvo</button>
       <button type="button" class="btn danger" id="reset">Limpar</button>
     </div>
   </div>
 
   <div class="line">
-    <span class="who"><i class="dot me"></i>Eu</span>
+    <span class="who"><i class="dot me"></i>Minha posição</span>
     <div class="in"><span>Y</span><input type="text" inputmode="none" id="my" autocomplete="off" aria-label="Minha posição, Y"></div>
     <div class="in"><span>X</span><input type="text" inputmode="none" id="mx" autocomplete="off" aria-label="Minha posição, X"></div>
   </div>
@@ -274,11 +274,6 @@ dd{margin:0; font:600 15px var(--mono); font-variant-numeric:tabular-nums}
     $(id).addEventListener('focus', function(){ setActive(id); try{ this.select(); }catch(e){} });
   });
 
-  $('swap').addEventListener('click', function(){
-    var a=$('mx').value, b=$('my').value;
-    $('mx').value=$('tx').value; $('my').value=$('ty').value;
-    $('tx').value=a; $('ty').value=b; save(); render();
-  });
   $('clear').addEventListener('click', function(){
     $('tx').value=''; $('ty').value=''; render(); $('ty').focus(); setActive('ty');
   });
