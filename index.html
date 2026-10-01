@@ -55,6 +55,7 @@ h1{
   padding:7px 10px; background:transparent; color:var(--ink);
   border:1.5px solid var(--line); border-radius:8px; font:600 14px "Barlow",system-ui,sans-serif; cursor:pointer;
 }
+.btn.danger{color:var(--tgt); border-color:var(--tgt)}
 .btn:focus-visible,.k:focus-visible,input:focus-visible{outline:3px solid var(--focus); outline-offset:2px}
 
 .line{display:grid; grid-template-columns:54px 1fr 1fr; gap:8px; align-items:center; flex:none}
@@ -110,10 +111,11 @@ dd{margin:0; font:600 17px "Barlow",sans-serif; font-variant-numeric:tabular-num
 <body>
 <main>
   <div class="head">
-    <h1>Distância no Wardogs</h1>
+    <h1>Wardogs</h1>
     <div class="tools">
       <button type="button" class="btn" id="swap">Trocar</button>
       <button type="button" class="btn" id="clear">Novo alvo</button>
+      <button type="button" class="btn danger" id="reset">Limpar</button>
     </div>
   </div>
 
@@ -242,6 +244,12 @@ dd{margin:0; font:600 17px "Barlow",sans-serif; font-variant-numeric:tabular-num
   });
   $('clear').addEventListener('click', function(){
     $('tx').value=''; $('ty').value=''; render(); $('ty').focus(); setActive('ty');
+  });
+
+  $('reset').addEventListener('click', function(){
+    ids.forEach(function(i){ $(i).value=''; });
+    try{ localStorage.removeItem('wardogs-xy'); }catch(e){}
+    render(); $('my').focus(); setActive('my');
   });
 
   function nextField(){
