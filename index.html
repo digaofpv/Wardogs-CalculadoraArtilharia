@@ -148,14 +148,14 @@ dd{margin:0; font:600 15px var(--mono); font-variant-numeric:tabular-nums}
   </div>
 
   <div class="line">
-    <span class="who"><i class="dot me"></i>Minha posição</span>
-    <div class="in"><span>Y</span><input type="text" inputmode="none" id="my" autocomplete="off" aria-label="Minha posição, Y"></div>
-    <div class="in"><span>X</span><input type="text" inputmode="none" id="mx" autocomplete="off" aria-label="Minha posição, X"></div>
-  </div>
-  <div class="line">
     <span class="who"><i class="dot tgt"></i>Alvo</span>
     <div class="in"><span>Y</span><input type="text" inputmode="none" id="ty" autocomplete="off" aria-label="Alvo, Y"></div>
     <div class="in"><span>X</span><input type="text" inputmode="none" id="tx" autocomplete="off" aria-label="Alvo, X"></div>
+  </div>
+  <div class="line">
+    <span class="who"><i class="dot me"></i>Minha posição</span>
+    <div class="in"><span>Y</span><input type="text" inputmode="none" id="my" autocomplete="off" aria-label="Minha posição, Y"></div>
+    <div class="in"><span>X</span><input type="text" inputmode="none" id="mx" autocomplete="off" aria-label="Minha posição, X"></div>
   </div>
 
   <section class="result" aria-live="polite">
@@ -203,8 +203,8 @@ dd{margin:0; font:600 15px var(--mono); font-variant-numeric:tabular-nums}
 <script>
 (function(){
   var $ = function(id){ return document.getElementById(id); };
-  var ids = ['my','mx','ty','tx'];
-  var active = 'my', fresh = true;
+  var ids = ['ty','tx','my','mx'];
+  var active = 'ty', fresh = true;
   var nf0 = new Intl.NumberFormat('pt-BR',{maximumFractionDigits:0});
   var nf1 = new Intl.NumberFormat('pt-BR',{maximumFractionDigits:1});
   var nf2 = new Intl.NumberFormat('pt-BR',{maximumFractionDigits:2});
@@ -281,7 +281,7 @@ dd{margin:0; font:600 15px var(--mono); font-variant-numeric:tabular-nums}
   $('reset').addEventListener('click', function(){
     ids.forEach(function(i){ $(i).value=''; });
     try{ localStorage.removeItem('wardogs-xy'); }catch(e){}
-    render(); $('my').focus(); setActive('my');
+    render(); $('ty').focus(); setActive('ty');
   });
 
   function nextField(){
@@ -305,7 +305,7 @@ dd{margin:0; font:600 15px var(--mono); font-variant-numeric:tabular-nums}
     b.addEventListener('click', function(){ press(b.getAttribute('data-k')); });
   });
 
-  setActive('my');
+  setActive('ty');
   render();
 
   if('serviceWorker' in navigator){
